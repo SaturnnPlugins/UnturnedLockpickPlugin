@@ -44,6 +44,7 @@ namespace lockpickChance
                         allow = true;
                         resultMessage = $"Lockpicking Succeeded, Success chance {entry.LockpickChance}%!";
                         UnturnedChat.Say(uPlayer, resultMessage, Color.green);
+
                         if (Configuration.Instance.Logging)
                             Logger.Log($"{uPlayer.CharacterName} succeeded at lockpicking with Stealy [{itemId}]. Roll: {roll:F2}. Chance: {entry.LockpickChance}.");
                     }
@@ -52,8 +53,34 @@ namespace lockpickChance
                         allow = false;
                         resultMessage = $"Lockpicking Failed, Success chance {entry.LockpickChance}%!";
                         UnturnedChat.Say(uPlayer, resultMessage, Color.red);
-                        if (Configuration.Instance.Logging)
-                            Logger.Log($"{uPlayer.CharacterName} failed lockpicking with Stealy [{itemId}]. Roll: {roll:F2}. Chance: {entry.LockpickChance}.");
+
+                        bool itemFound = false;
+                        for (byte page = 0; page < 10; page++) 
+                        {
+                            for (byte index = 0; index < 30; index++) 
+                            {
+                                var itemJar = uPlayer.Player.inventory.getItem(page, index);
+
+                                if (itemJar != null && itemJar.item != null && itemJar.item.id == itemId) 
+                                {
+                                    uPlayer.Player.inventory.removeItem(page, index);
+                                    itemFound = true;
+
+                                    if (Configuration.Instance.Logging)
+                                        Logger.Log($"{uPlayer.CharacterName} failed lockpicking with Stealy [{itemId}]. Roll: {roll:F2}. Chance: {entry.LockpickChance}. Item removed from inventory.");
+                                    break;
+                                }
+                            }
+
+                            if (itemFound)
+                                break;
+                        }
+
+                        if (!itemFound)
+                        {
+                            if (Configuration.Instance.Logging)
+                                Logger.Log($"Failed to find Stealy Wheely [{itemId}] in {uPlayer.CharacterName}'s inventory.");
+                        }
                     }
 
                     return;
