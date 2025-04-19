@@ -1,0 +1,6 @@
+E:\Git Repos\unturned-plugins\lockpickChance\lockpickChance\obj\Debug\lockpickChance.csproj.AssemblyReference.cache
+E:\Git Repos\unturned-plugins\lockpickChance\lockpickChance\obj\Debug\lockpickChance.csproj.CoreCompileInputs.cache
+E:\Git Repos\unturned-plugins\lockpickChance\lockpickChance\bin\Debug\lockpickChance.dll
+E:\Git Repos\unturned-plugins\lockpickChance\lockpickChance\bin\Debug\lockpickChance.pdb
+E:\Git Repos\unturned-plugins\lockpickChance\lockpickChance\obj\Debug\lockpickChance.dll
+E:\Git Repos\unturned-plugins\lockpickChance\lockpickChance\obj\Debug\lockpickChance.pdb
