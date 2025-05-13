@@ -42,8 +42,8 @@ namespace lockpickChance
                     if (roll <= entry.LockpickChance)
                     {
                         allow = true;
-                        resultMessage = $"Lockpicking Succeeded, Success chance {entry.LockpickChance}%!";
-                        UnturnedChat.Say(uPlayer, resultMessage, Color.green);
+                        resultMessage = $"<b><color=#00FFFF>Lockpicking </color><color=green>Succeeded</color><color=#00FFFF>, Success chance {entry.LockpickChance}%!</color></b>";
+                        UnturnedChat.Say(uPlayer, resultMessage, true);
 
                         if (Configuration.Instance.Logging)
                             Logger.Log($"{uPlayer.CharacterName} succeeded at lockpicking with Stealy [{itemId}]. Roll: {roll:F2}. Chance: {entry.LockpickChance}.");
@@ -51,8 +51,8 @@ namespace lockpickChance
                     else
                     {
                         allow = false;
-                        resultMessage = $"Lockpicking Failed, Success chance {entry.LockpickChance}%!";
-                        UnturnedChat.Say(uPlayer, resultMessage, Color.red);
+                        resultMessage = $"<b><color=#00FFFF>Lockpicking </color><color=red>Failed</color><color=#00FFFF>, Success chance {entry.LockpickChance}%!</color></b>";
+                        UnturnedChat.Say(uPlayer, resultMessage, true);
 
                         bool itemFound = false;
                         for (byte page = 0; page < 10; page++) 
