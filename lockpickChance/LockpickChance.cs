@@ -27,6 +27,14 @@ namespace lockpickChance
             Logger.Log("StealyChance plugin unloaded.");
         }
 
+        private void DebugLog(string message)
+        {
+            if (Configuration.Instance.Logging)
+            {
+                Logger.Log(message);
+            }
+        }
+
         private void OnVehicleLockpicked(InteractableVehicle vehicle, Player instigatingPlayer, ref bool allow)
         {
             var uPlayer = UnturnedPlayer.FromPlayer(instigatingPlayer);
@@ -45,8 +53,7 @@ namespace lockpickChance
                         resultMessage = $"<b><color=#00FFFF>Lockpicking </color><color=green>Succeeded</color><color=#00FFFF>, Success chance {entry.LockpickChance}%!</color></b>";
                         UnturnedChat.Say(uPlayer, resultMessage, true);
 
-                        if (Configuration.Instance.Logging)
-                            Logger.Log($"{uPlayer.CharacterName} succeeded at lockpicking with Stealy [{itemId}]. Roll: {roll:F2}. Chance: {entry.LockpickChance}.");
+                        DebugLog($"{uPlayer.CharacterName} succeeded at lockpicking with Stealy [{itemId}]. Roll: {roll:F2}. Chance: {entry.LockpickChance}.");
                     }
                     else
                     {
@@ -66,9 +73,7 @@ namespace lockpickChance
                                     uPlayer.Player.inventory.removeItem(page, index);
                                     itemFound = true;
 
-                                    if (Configuration.Instance.Logging)
-                                        Logger.Log($"{uPlayer.CharacterName} failed lockpicking with Stealy [{itemId}]. Roll: {roll:F2}. Chance: {entry.LockpickChance}. Item removed from inventory.");
-                                    break;
+                                    DebugLog($"{uPlayer.CharacterName} failed lockpicking with Stealy [{itemId}]. Roll: {roll:F2}. Chance: {entry.LockpickChance}. Item removed from inventory.");
                                 }
                             }
 
@@ -78,8 +83,7 @@ namespace lockpickChance
 
                         if (!itemFound)
                         {
-                            if (Configuration.Instance.Logging)
-                                Logger.Log($"Failed to find Stealy Wheely [{itemId}] in {uPlayer.CharacterName}'s inventory.");
+                            DebugLog($"Failed to find Stealy Wheely [{itemId}] in {uPlayer.CharacterName}'s inventory.");
                         }
                     }
 
